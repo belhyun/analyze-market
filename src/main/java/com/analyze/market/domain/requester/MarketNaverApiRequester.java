@@ -1,5 +1,6 @@
 package com.analyze.market.domain.requester;
 
+import com.analyze.market.domain.dto.MarketDTO;
 import com.analyze.market.domain.dto.MarketPaginationDTO;
 import com.analyze.market.domain.util.MarketHttpParameterUtil;
 import com.analyze.market.domain.util.MarketPaginationUtil;
@@ -25,12 +26,12 @@ import static com.analyze.market.domain.util.MarketHttpParameterUtil.*;
 public class MarketNaverApiRequester implements MarketApiRequester {
 
     @Override
-    public String request(String query) {
+    public MarketPaginationDTO getPaginationCount(String query) {
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         try {
             if (StringUtils.isEmpty(query)) {
-                return EMPTY_STRING;
+                return new MarketPaginationDTO();
             }
             HttpGet request = new HttpGet(makeGetParameter(BLOG_SEARCH_API_URL, new BasicNameValuePair("query", URLEncoder.encode(query, "UTF-8"))));
             request.addHeader("X-Naver-Client-Id", CLIENT_ID);
@@ -38,14 +39,20 @@ public class MarketNaverApiRequester implements MarketApiRequester {
             HttpResponse httpResponse = httpClient.execute(request);
             int responseCode = httpResponse.getStatusLine().getStatusCode();
             if (responseCode == HttpStatus.OK.value()) {
-                JSONObject jsonObject = new JSONObject(httpResponse.getEntity().getContent().toString());
-                MarketPaginationDTO paginationDTO = MarketPaginationUtil.parse(jsonObject);
-                return EntityUtils.toString(httpResponse.getEntity());
+                MarketPaginationDTO paginationDTO = MarketPaginationUtil.parse(
+                        new JSONObject(EntityUtils.toString(httpResponse.getEntity()))
+                );
+                return paginationDTO;
             }
-            return EMPTY_STRING;
+            return new MarketPaginationDTO();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return EMPTY_STRING;
+        return new MarketPaginationDTO();
+    }
+
+    @Override
+    public MarketDTO getPost(String query, MarketPaginationDTO dto) {
+        return null;
     }
 }
