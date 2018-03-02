@@ -1,6 +1,6 @@
 package com.analyze.market.domain.requester;
 
-public class MarketApiConstants {
+public class MarketAPIConstants {
 
     public static String CLIENT_ID = "7NssHnc_GUwrjvavKSaf";
     public static String CLIENT_SECRET = "9LFKwLXOzu";

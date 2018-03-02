@@ -6,7 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @AllArgsConstructor
-public class MarketPaginationDTO {
+public class MarketPaginationDTO extends MarketAbstractDTO {
 
     /**총건수*/
     private Integer totalCount;

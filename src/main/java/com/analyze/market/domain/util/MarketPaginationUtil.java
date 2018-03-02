@@ -18,6 +18,9 @@ public class MarketPaginationUtil {
             if (total > 0) {
                 pageCount = (int) Math.ceil(total / PAGE_SIZE);
             }
+            if (pageCount >= 1000) {
+                pageCount = 1000;
+            }
             return new MarketPaginationDTO(total, pageCount);
         } catch (JSONException e) {
             e.printStackTrace();
