@@ -15,13 +15,13 @@ import java.util.List;
 import static com.analyze.market.domain.requester.MarketAPIConstants.CLIENT_ID;
 import static com.analyze.market.domain.requester.MarketAPIConstants.CLIENT_SECRET;
 
-public abstract class MarketAPIRequester {
+public abstract class MarketAPIRequester<T> {
 
-    public abstract MarketAbstractDTO execute(String query);
+    public abstract T execute(String query);
 
-    public abstract List<MarketAbstractDTO> execute(String query, MarketPaginationDTO dto, String sortType);
+    public abstract List<? extends MarketAbstractDTO> execute(String query, MarketPaginationDTO dto, String sortType);
 
-    public MarketAbstractDTO template(String url) throws IOException, MarketNotFoundException {
+    public List<T> template(String url) throws IOException, MarketNotFoundException {
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpResponse httpResponse;
@@ -40,5 +40,5 @@ public abstract class MarketAPIRequester {
         throw new MarketNotFoundException();
     }
 
-    public abstract MarketAbstractDTO afterStep(HttpResponse response);
+    public abstract List<T> afterStep(HttpResponse response);
 }
