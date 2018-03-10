@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MarketParserUtil {
 
-    private static int PAGE_SIZE = 100;
+    private static int PAGE_SIZE = 10;
 
     public static List<MarketPaginationDTO> parse(JSONObject jsonObject) {
         Integer pageCount = 0, total;
@@ -25,8 +25,8 @@ public class MarketParserUtil {
             if (total > 0) {
                 pageCount = (int) Math.ceil(total / PAGE_SIZE);
             }
-            if (pageCount >= 100) {
-                pageCount = 100;
+            if (pageCount >= 10) {
+                pageCount = 10;
             }
             return Lists.newArrayList(new MarketPaginationDTO(total, pageCount));
         } catch (JSONException e) {
@@ -46,8 +46,8 @@ public class MarketParserUtil {
                 JSONObject item = items.getJSONObject(i);
                 Document title = Jsoup.parse(item.getString("title"));
                 Document description = Jsoup.parse(item.getString("description"));
-                Document bloggerName = Jsoup.parse(item.getString("description"));
-                String link = item.getString("description");
+                Document bloggerName = Jsoup.parse(item.getString("bloggername"));
+                String link = item.getString("link").replace("amp;", "");
                 MarketDTO marketDTO = new MarketDTO(title.text(), description.text(), bloggerName.text(), link);
                 resultList.add(marketDTO);
             }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Untitled</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css"/>
+    <link rel="stylesheet" href="assets/css/Footer-Basic.css"/>
+    <link rel="stylesheet" href="assets/css/Footer-Clean.css"/>
+    <link rel="stylesheet" href="assets/css/Footer-Dark.css"/>
+    <link rel="stylesheet" href="assets/css/Newsletter-Subscription-Form.css"/>
+    <link rel="stylesheet" href="assets/css/styles.css"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1><a href="/">처음으로</a></h1>
+        <h1>검색결과 : <small th:text='${query}'></small></h1>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>블로거이름</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>링크</th>
+            </tr>
+            </thead>
+            <tbody th:each="detail: ${details}" th:remove="tag">
+                <tr>
+                    <td th:text="${detail.bloggerName}"></td>
+                    <td th:text="${detail.title}"></td>
+                    <td th:text="${detail.description}"></td>
+                    <td><a th:href="${detail.link}" th:text="${detail.link}" target="_blank"></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<nav style="/*margin:auto;*//*padding:auto;*//*margin:0 auto;*/text-align:center;">
+    <ul class="pagination">
+        <li><a aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+        <li><a>1</a></li>
+        <li><a>2</a></li>
+        <li><a>3</a></li>
+        <li><a>4</a></li>
+        <li><a>5</a></li>
+        <li><a aria-label="Next"><span aria-hidden="true">»</span></a></li>
+    </ul>
+</nav>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

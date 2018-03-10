@@ -14,10 +14,10 @@ public class WelcomeController {
     @Value("${welcome.message:test}")
     private String message = "Hello World";
 
-    @RequestMapping("/")
+    /*@RequestMapping("/")
     public String welcome(Map<String, Object> model) {
         model.put("message", this.message);
         return "welcome";
-    }
+    }*/
 
 }

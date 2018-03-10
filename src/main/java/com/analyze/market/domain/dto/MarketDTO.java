@@ -1,22 +1,20 @@
 package com.analyze.market.domain.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Getter
 public class MarketDTO extends MarketAbstractDTO {
 
-    private String title;
+    public String title;
 
-    private String description;
+    public String description;
 
-    private String bloggerName;
+    public String bloggerName;
 
-    private String link;
+    public String link;
 
 }
